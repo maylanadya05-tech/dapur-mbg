@@ -65,6 +65,7 @@
   --text-muted: hsl(220, 8%, 55%);
 
   /* ── Accent — Amber Gold (10%) ── */
+  /* Note: --emerald is retained as the CSS variable name for backward compatibility with views */
   --emerald: hsl(38, 92%, 50%);
   --emerald-light: hsl(38, 100%, 58%);
   --emerald-dim: hsla(38, 92%, 50%, 0.12);
@@ -2375,7 +2376,7 @@ textarea {
 }
 
 .text-emerald {
-  color: var(--emerald);
+  color: var(--accent-text);
 }
 
 /* Type scale utilities */

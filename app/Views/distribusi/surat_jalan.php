@@ -208,7 +208,7 @@
   </div>
 
   <!-- QR Code JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="<?= base_url('assets/vendor/qrcode.min.js') ?>"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       var qrContainer = document.createElement('div');
