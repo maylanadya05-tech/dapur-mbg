@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function () {
       
       const datasets = schools.map((school, i) => {
         const colors = [
-          'hsl(150, 84%, 37%)', // Emerald
+          'hsl(38, 92%, 50%)', // Amber Gold
           'hsl(210, 100%, 56%)', // Blue
           'hsl(35, 100%, 52%)',  // Orange
           'hsl(340, 82%, 52%)',  // Pink/Red
@@ -205,8 +205,8 @@ document.addEventListener('DOMContentLoaded', function () {
         {
           label: 'SDN Merdeka 01',
           data: [4.2, 4.5, 4.3, 4.8, 4.7, 5.0],
-          borderColor: 'hsl(150, 84%, 37%)',
-          backgroundColor: 'hsl(150, 84%, 37%)',
+          borderColor: 'hsl(38, 92%, 50%)',
+          backgroundColor: 'hsl(38, 92%, 50%)',
           tension: 0.3,
           fill: false
         },

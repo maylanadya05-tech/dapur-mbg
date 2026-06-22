@@ -210,3 +210,74 @@ function filterTable(tableId, query) {
     emptyRow.style.display = visibleCount === 0 ? '' : 'none';
   }
 }
+
+/* ─────────────────────────────────────────────────────────────
+   7. TOAST NOTIFICATION SYSTEM
+   ───────────────────────────────────────────────────────────── */
+function showToast(message, type = 'success') {
+  const container = document.getElementById('toast-container');
+  if (!container) return;
+
+  const toast = document.createElement('div');
+  toast.className = `toast toast-${type}`;
+
+  let iconName = 'check-circle';
+  if (type === 'error') iconName = 'alert-triangle';
+  else if (type === 'warning') iconName = 'alert-circle';
+  else if (type === 'info') iconName = 'info';
+
+  toast.innerHTML = `
+    <div class="toast-icon toast-${type}">
+      <i data-lucide="${iconName}"></i>
+    </div>
+    <div class="toast-content">${message}</div>
+    <button class="toast-close" aria-label="Close Toast">&times;</button>
+  `;
+
+  container.appendChild(toast);
+
+  // Re-run lucide to render the icon in toast
+  if (typeof lucide !== 'undefined') {
+    lucide.createIcons();
+  }
+
+  // Trigger browser reflow to slide in
+  toast.offsetHeight;
+  toast.classList.add('show');
+
+  const closeBtn = toast.querySelector('.toast-close');
+  const dismiss = () => {
+    toast.classList.remove('show');
+    toast.classList.add('hide');
+    setTimeout(() => {
+      toast.remove();
+    }, 300);
+  };
+
+  closeBtn.addEventListener('click', dismiss);
+
+  // Auto-dismiss after 5 seconds
+  setTimeout(dismiss, 5000);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   8. FORM SUBMIT BUTTON LOADING STATE (Anti-Double Submit)
+   ───────────────────────────────────────────────────────────── */
+document.addEventListener('submit', (e) => {
+  // Find any submit button inside the submitting form
+  const form = e.target;
+  
+  // Skip forms that are marked to skip loading (e.g. search/filter/get forms)
+  if (form.method.toLowerCase() === 'get') return;
+  
+  const submitBtn = form.querySelector('button[type="submit"], input[type="submit"]');
+  if (submitBtn) {
+    // Add loading class and disable
+    submitBtn.classList.add('btn-loading');
+    // We delay the actual disabling for 50ms so that the form submit data still gets sent.
+    // If we disable instantly, some browsers omit the disabled button from submit data.
+    setTimeout(() => {
+      submitBtn.setAttribute('disabled', 'true');
+    }, 50);
+  }
+});

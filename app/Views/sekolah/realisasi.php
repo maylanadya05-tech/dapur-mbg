@@ -156,6 +156,7 @@
 
 <?php $this->section('scripts'); ?>
 <script>
+document.addEventListener('DOMContentLoaded', function () {
   // Chart: Target vs Realisasi
   new Chart(document.getElementById('chartTargetRealisasi'), {
     type: 'bar',
@@ -217,6 +218,7 @@
       }
     }
   });
+});
 </script>
 <?php $this->endSection(); ?>
 

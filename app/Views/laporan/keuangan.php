@@ -135,7 +135,7 @@
 
 <?php $this->section('scripts'); ?>
 <script>
-(function() {
+document.addEventListener('DOMContentLoaded', function () {
   const pembelianLabels = <?= json_encode(array_column($trendPembelian, 'bulan')) ?>;
   const pembelianData   = <?= json_encode(array_map(fn($r) => (float)$r['total'], $trendPembelian)) ?>;
 
@@ -185,7 +185,7 @@
       scales: { y: { beginAtZero: true, ticks: { callback: v => 'Rp ' + (v/1e6).toFixed(1) + 'jt' } } }
     }
   });
-})();
+});
 </script>
 <?php $this->endSection(); ?>
 

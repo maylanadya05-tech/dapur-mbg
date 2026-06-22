@@ -42,33 +42,40 @@
       <!-- PAGE CONTENT -->
       <div class="page-content">
 
-        <!-- Flash Messages -->
+        <!-- Toast Container -->
+        <div id="toast-container" class="toast-container"></div>
+
+        <!-- Flash Messages via Toast -->
         <?php if (session()->getFlashdata('success')): ?>
-        <div class="alert alert-success" id="flashAlert" role="alert">
-          <span><?= esc(session()->getFlashdata('success')) ?></span>
-          <button onclick="this.parentElement.remove()" aria-label="Close">&times;</button>
-        </div>
+          <script>
+            document.addEventListener('DOMContentLoaded', () => {
+              showToast(<?= json_encode(session()->getFlashdata('success')) ?>, 'success');
+            });
+          </script>
         <?php endif; ?>
 
         <?php if (session()->getFlashdata('error')): ?>
-        <div class="alert alert-error" id="flashAlert" role="alert">
-          <span><?= esc(session()->getFlashdata('error')) ?></span>
-          <button onclick="this.parentElement.remove()" aria-label="Close">&times;</button>
-        </div>
+          <script>
+            document.addEventListener('DOMContentLoaded', () => {
+              showToast(<?= json_encode(session()->getFlashdata('error')) ?>, 'error');
+            });
+          </script>
         <?php endif; ?>
 
         <?php if (session()->getFlashdata('warning')): ?>
-        <div class="alert alert-warning" role="alert">
-          <span><?= esc(session()->getFlashdata('warning')) ?></span>
-          <button onclick="this.parentElement.remove()" aria-label="Close">&times;</button>
-        </div>
+          <script>
+            document.addEventListener('DOMContentLoaded', () => {
+              showToast(<?= json_encode(session()->getFlashdata('warning')) ?>, 'warning');
+            });
+          </script>
         <?php endif; ?>
 
         <?php if (session()->getFlashdata('info')): ?>
-        <div class="alert alert-info" role="alert">
-          <span><?= esc(session()->getFlashdata('info')) ?></span>
-          <button onclick="this.parentElement.remove()" aria-label="Close">&times;</button>
-        </div>
+          <script>
+            document.addEventListener('DOMContentLoaded', () => {
+              showToast(<?= json_encode(session()->getFlashdata('info')) ?>, 'info');
+            });
+          </script>
         <?php endif; ?>
 
         <!-- ── Rendered Page Content ── -->
@@ -81,14 +88,14 @@
   <!-- ═══════════════════════════════════════════════════
        SCRIPTS (deferred)
   ═══════════════════════════════════════════════════ -->
-  <!-- Alpine.js -->
-  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script defer src="<?= base_url('assets/vendor/chart.umd.min.js') ?>"></script>
+  <!-- Lucide Icons -->
+  <script defer src="<?= base_url('assets/vendor/lucide.min.js') ?>"></script>
+  <!-- Alpine.js -->
+  <script defer src="<?= base_url('assets/vendor/alpine.min.js') ?>"></script>
   <!-- App JS -->
-  <script src="<?= base_url('assets/js/app.js') ?>"></script>
+  <script defer src="<?= base_url('assets/js/app.js') ?>"></script>
   <!-- Initialize Lucide -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {

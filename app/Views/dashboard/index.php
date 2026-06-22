@@ -8,7 +8,7 @@
     gap: 0.375rem;
     padding: 0.3rem 0.75rem;
     background: var(--emerald-dim);
-    border: 1px solid hsla(150, 84%, 37%, 0.25);
+    border: 1px solid hsla(38, 92%, 50%, 0.25);
     border-radius: var(--border-radius-full);
     font-size: 0.78rem;
     font-weight: 600;
@@ -486,10 +486,10 @@ document.addEventListener('DOMContentLoaded', function () {
         backgroundColor: (ctx) => {
           const max = Math.max(...values);
           return ctx.raw === max
-            ? 'hsl(150, 84%, 37%)'
-            : 'hsla(150, 84%, 37%, 0.25)';
+            ? 'hsl(38, 92%, 50%)'
+            : 'hsla(38, 92%, 50%, 0.25)';
         },
-        borderColor: 'hsl(150, 84%, 37%)',
+        borderColor: 'hsl(38, 92%, 50%)',
         borderWidth: 1,
         borderRadius: 8,
         borderSkipped: false,

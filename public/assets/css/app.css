@@ -13,10 +13,8 @@
    8. Whitespace   — Intentional, generous breathing room
    9. 8pt Grid     — All spacing in multiples of 8px (0.5rem)
    
-   Font: Plus Jakarta Sans | Accent: Emerald hsl(150,84%,37%)
+   Font: Plus Jakarta Sans | Accent: Amber Gold hsl(38,92%,50%)
    ============================================================ */
-
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
 
 /* ────────────────────────────────────────────────────────────
    1. CSS CUSTOM PROPERTIES (DESIGN TOKENS)
@@ -2106,8 +2104,8 @@ textarea {
 
 /* 6. Empty state icon accent variants */
 .empty-state-icon.icon-success {
-  background: linear-gradient(135deg, var(--success-dim), hsla(150, 84%, 37%, 0.05));
-  border-color: hsla(150, 84%, 37%, 0.3);
+  background: linear-gradient(135deg, var(--success-dim), hsla(142, 72%, 40%, 0.05));
+  border-color: hsla(142, 72%, 40%, 0.3);
 }
 
 .empty-state-icon.icon-success svg {
@@ -2987,4 +2985,247 @@ textarea {
 
 :root[data-theme="light"] .data-table thead {
   background: hsl(210, 20%, 93%);
+}
+
+/* ────────────────────────────────────────────────────────────
+   ADDITIONAL ENHANCEMENTS (A11y, Toast, Loading States, Table UX)
+   ──────────────────────────────────────────────────────────── */
+
+/* 1. Prefers Reduced Motion Fallback */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+  }
+  .ripple-wave {
+    display: none !important;
+  }
+}
+
+/* 2. Keyboard Navigation Focus Indicator (:focus-visible) */
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+button:focus-visible,
+.btn:focus-visible,
+a:focus-visible,
+.nav-item:focus-visible {
+  outline: 2px solid var(--emerald) !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 4px hsla(38, 92%, 50%, 0.25) !important;
+}
+
+/* 3. Lucide Icons Default Dimensions (Prevents Layout Shift) */
+i[data-lucide],
+.lucide {
+  display: inline-block;
+  width: 1.25rem;
+  height: 1.25rem;
+  min-width: 1.25rem;
+  min-height: 1.25rem;
+  vertical-align: middle;
+}
+
+.greeting-badge i[data-lucide] {
+  width: 13px;
+  height: 13px;
+  min-width: 13px;
+  min-height: 13px;
+}
+
+/* 4. Button Loading State (Cegah Double Submit) */
+.btn {
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.btn-loading {
+  color: transparent !important;
+  pointer-events: none !important;
+  cursor: not-allowed;
+}
+
+.btn-loading::after {
+  content: "";
+  position: absolute;
+  width: 1.2rem;
+  height: 1.2rem;
+  top: 50%;
+  left: 50%;
+  margin-top: -0.6rem;
+  margin-left: -0.6rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: btn-spin 0.6s linear infinite;
+}
+
+@keyframes btn-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* 5. Toast Notifications Layout Styles */
+.toast-container {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  pointer-events: none;
+}
+
+.toast {
+  pointer-events: auto;
+  min-width: 320px;
+  max-width: 420px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-left: 4px solid var(--emerald);
+  border-radius: var(--border-radius);
+  padding: 1rem 1.25rem;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  transform: translateX(120%);
+  opacity: 0;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease, max-height 0.3s ease, margin 0.3s ease, padding 0.3s ease;
+}
+
+.toast.show {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.toast.hide {
+  transform: translateX(120%);
+  opacity: 0;
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: -0.75rem;
+  overflow: hidden;
+  border-color: transparent;
+}
+
+.toast-success { border-left-color: var(--status-success); }
+.toast-error { border-left-color: var(--status-danger); }
+.toast-warning { border-left-color: var(--status-warning); }
+.toast-info { border-left-color: var(--status-info); }
+
+.toast-icon {
+  flex-shrink: 0;
+  width: 1.35rem;
+  height: 1.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toast-icon.toast-success { color: var(--status-success); }
+.toast-icon.toast-error { color: var(--status-danger); }
+.toast-icon.toast-warning { color: var(--status-warning); }
+.toast-icon.toast-info { color: var(--status-info); }
+
+.toast-content {
+  flex-grow: 1;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.toast-close {
+  flex-shrink: 0;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 1.35rem;
+  line-height: 1;
+  padding: 0;
+  margin-left: 0.5rem;
+  transition: var(--transition-fast);
+}
+
+.toast-close:hover {
+  color: var(--text-primary);
+}
+
+/* 6. Light Theme Color WCAG AA Contrast Overrides */
+:root {
+  --accent-text: var(--emerald);
+}
+
+:root[data-theme="light"] {
+  --accent-text: hsl(38, 95%, 32%) !important;
+}
+
+/* Override text element colors that must maintain AA contrast in Light Theme */
+a {
+  color: var(--accent-text);
+}
+
+.nav-item.active {
+  color: var(--accent-text) !important;
+}
+
+.greeting-badge {
+  color: var(--accent-text) !important;
+}
+
+/* 7. Consistent Table UI / UX Polish */
+.data-table-wrapper {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--space-4);
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.data-table th {
+  background: var(--bg-sidebar);
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  padding: 1rem 1.25rem;
+  border-bottom: 2px solid var(--border-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.data-table td {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  vertical-align: middle;
+}
+
+.data-table tbody tr {
+  transition: background 0.15s ease;
+}
+
+.data-table tbody tr:hover {
+  background: var(--bg-card-hover);
+}
+
+.data-table tbody tr:last-child td {
+  border-bottom: none;
 }

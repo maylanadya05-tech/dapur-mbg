@@ -21,11 +21,17 @@
 
   <?= $this->renderSection('content') ?>
 
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-  <!-- Alpine.js -->
-  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <!-- Toast Container -->
+  <div id="toast-container" class="toast-container"></div>
 
+  <!-- Lucide Icons -->
+  <script defer src="<?= base_url('assets/vendor/lucide.min.js') ?>"></script>
+  <!-- Alpine.js -->
+  <script defer src="<?= base_url('assets/vendor/alpine.min.js') ?>"></script>
+  <!-- App JS -->
+  <script defer src="<?= base_url('assets/js/app.js') ?>"></script>
+
+  <!-- Initialize Lucide -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       if (typeof lucide !== 'undefined') lucide.createIcons();
