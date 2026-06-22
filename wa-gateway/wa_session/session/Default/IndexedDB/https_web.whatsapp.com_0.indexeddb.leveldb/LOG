@@ -1,0 +1,5 @@
+2026/06/21-05:41:16.257 455c Creating DB C:\xampp\htdocs\dapur-mbg\wa-gateway\wa_session\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb since it was missing.
+2026/06/21-05:41:16.262 455c Reusing MANIFEST C:\xampp\htdocs\dapur-mbg\wa-gateway\wa_session\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2026/06/21-05:42:07.346 4fe8 Level-0 table #5: started
+2026/06/21-05:42:07.420 4fe8 Level-0 table #5: 1049074 bytes OK
+2026/06/21-05:42:07.423 4fe8 Delete type=0 #3
